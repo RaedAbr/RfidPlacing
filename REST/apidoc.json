@@ -1,0 +1,11 @@
+{
+  "name": "NFC PLACING",
+  "version": "1.0.0",
+  "description": "REST SERVER",
+  "title": "NFC PLACING",
+  "order": [
+      "GetObject",
+      "InsertUpdateObject",
+      "DeleteObject"
+  ]
+}
