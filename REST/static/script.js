@@ -30,9 +30,14 @@ function socket_io_receive_scan(data) {
     $('#id').text(data.id);
     $('#title').text(data.name);
     $('#name').text(data.name);
-    $('#location').text(data.location);
+
     let location = data.location;
     let coord = location.split(',');
+
+    $('#location').text(coord[0]);
+    $('#mapX').text(coord[1]);
+    $('#mapY').text(coord[2]);
+    
     drawObject(context, data.name, coord[1], coord[2]);
 }
 
@@ -41,6 +46,8 @@ function socket_io_receive_scan_not_found(data) {
     $('#id').text("");
     $('#name').text("");
     $('#location').text("");
+    $('#mapX').text("");
+    $('#mapY').text("");
 }
 
 function drawObject(context, name, x, y) {
