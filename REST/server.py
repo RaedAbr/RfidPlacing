@@ -94,13 +94,23 @@ def object_delete(id):
 # ROUTES
 ###############################################################################
 
+@rest.route("/")
+def index():
+    return rest.send_static_file('index.html')
+
+@rest.route("/script.js")
+def script_js():
+    return rest.send_static_file('script.js')
+
+@rest.route("/nfc.png")
+def nfc_png():
+    return rest.send_static_file('nfc.png')
+
 @rest.route("/plan")
 def plan():
     return rest.send_static_file('plan.jpg')
 
-@rest.route("/")
-def index():
-    return 'NFC PLACING REST SERVER'
+
 
 @rest.route("/<object_id>", methods=['GET', 'POST', 'DELETE'])
 def info(object_id):
