@@ -26,7 +26,7 @@ function drawObject(context, name, x, y) {
     context.fillStyle = 'red';
     context.fillRect(x, y, 10, 10);
     context.font="18px sans-serif";
-    context.fillText(name, x + 12, y + 9);
+    context.fillText(name, (x + 12), (y + 9));
 }
 
 function loadImage(context, draw, name='', x=0, y=0) {
@@ -51,8 +51,11 @@ function socket_io_receive_scan(data) {
     $('#location').text(coord[0]);
     $('#mapX').text(coord[1]);
     $('#mapY').text(coord[2]);
-    
-    loadImage(context, true, data.name, coord[1], coord[2]);
+
+    var x = parseInt(coord[1]);
+    var y = parseInt(coord[2]);
+
+    loadImage(context, true, data.name, x, y);
 }
 
 function socket_io_receive_scan_not_found(data) {
