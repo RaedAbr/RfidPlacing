@@ -5,7 +5,7 @@
 ###############################################################################
 import sqlite3
 from flask import Flask, request, jsonify
-rest = Flask(__name__)
+rest = Flask(__name__, static_url_path='')
 
 ###############################################################################
 # SETTINGS
@@ -86,6 +86,10 @@ def object_delete(id):
 ###############################################################################
 # ROUTES
 ###############################################################################
+
+@rest.route("/plan")
+def plan():
+    return rest.send_static_file('plan.jpg')
 
 @rest.route("/")
 def index():
