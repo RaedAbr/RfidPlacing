@@ -172,14 +172,14 @@ if __name__ == "__main__":
 
 @apiSuccess {String} id Object ID
 @apiSuccess {String} name Object name
-@apiSuccess {String} location Object location
+@apiSuccess {String} location Object location with this format : name,x,y
 
 @apiSuccessExample Success Response
       HTTP/1.1 200 OK
       {
         "id": "356a192b7913b04c54574d18c28d46e6395428ab",
         "name": "Table",
-        "location": "A406"
+        "location": "A406,50,50"
       }
 
 @apiError {Unauthorized} 401 Authorization token is not valid
@@ -200,7 +200,7 @@ if __name__ == "__main__":
 
 @apiParam {String} :id Object ID
 @apiParam {String} name Object name
-@apiParam {String} location Object location
+@apiParam {String} location Object location with this format : name,x,y
 
 @apiHeader {String} Authorization Authorization token
 
