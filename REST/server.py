@@ -4,8 +4,11 @@
 # 04.04.2018
 ###############################################################################
 import sqlite3
+import json
 from flask import Flask, request, jsonify
 rest = Flask(__name__, static_url_path='')
+from flask_socketio import SocketIO, emit
+socketio = SocketIO(rest)
 
 ###############################################################################
 # SETTINGS
@@ -19,7 +22,7 @@ SQLITE_FILE = "NFC.db"
 # DATABASE FUNCTIONS
 ###############################################################################
 
-db = sqlite3.connect(SQLITE_FILE)
+db = sqlite3.connect(SQLITE_FILE, check_same_thread=False)
 cursor = db.cursor()
 
 def db_token_exist(token):
@@ -68,12 +71,16 @@ def object_get(id):
 
     # Return object
     if object is None:
+        broadcast_object_not_found_socket_io()
         return '', 404 # 404 = Not Found
     else:
-        return jsonify(
+        json_jsonify = jsonify(
             id=object[0],
             name=object[1],
             location=object[2])
+        data = {"id": str(object[0]), "name": str(object[1]), "location":str(object[2])}
+        broadcast_object_socket_io(json.dumps(data))
+        return json_jsonify
 
 def object_insert_update(id, name, location):
     db_object_insert_update(id, name, location)
@@ -124,10 +131,21 @@ def info(object_id):
     return '',400
 
 ###############################################################################
+# SOCKET.IO
+###############################################################################
+def broadcast_object_socket_io(data):
+    socketio.emit('SCAN', data, broadcast=True)
+
+def broadcast_object_not_found_socket_io():
+    socketio.emit('SCAN_NOT_FOUND', '', broadcast=True)
+
+###############################################################################
 # MAIN
 ###############################################################################
 if __name__ == "__main__":
-    rest.run(host=HOST, port=SERVER_PORT)
+    socketio.run(rest, host=HOST, port=SERVER_PORT)
+    #rest.run(host=HOST, port=SERVER_PORT)
+
 
 ###############################################################################
 # APIDOC
