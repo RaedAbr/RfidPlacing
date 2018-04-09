@@ -79,7 +79,7 @@ def object_get(id):
             name=object[1],
             location=object[2])
         data = {"id": str(object[0]), "name": str(object[1]), "location":str(object[2])}
-        broadcast_object_socket_io(json.dumps(data))
+        broadcast_object_socket_io(data)
         return json_jsonify
 
 def object_insert_update(id, name, location):
