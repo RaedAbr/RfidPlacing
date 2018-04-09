@@ -62,4 +62,5 @@ function socket_io_receive_scan_not_found(data) {
     $('#location').text("");
     $('#mapX').text("");
     $('#mapY').text("");
+    loadImage(context, false);
 }
