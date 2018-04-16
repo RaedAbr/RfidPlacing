@@ -16,7 +16,9 @@ Le produit est composé de 3 parties :
 
 ### Client Android
 
-Le client Android permet de lire les tags 
+Le client Android permet de lire et d'écrire sur les tags. 
+
+L'activité principale contient un formulaire qui permet à un utilisateur de saisir les données à écrire sur un tag.
 
 ### Client Web
 
